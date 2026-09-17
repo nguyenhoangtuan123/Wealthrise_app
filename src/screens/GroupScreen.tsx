@@ -60,12 +60,12 @@ export default function GroupScreen({ onGroupDetail }: Props) {
         {myGroups.length === 0 && (
           <p style={{ fontSize:"13px", color:"#9A9088", marginBottom:"12px" }}>Bạn chưa tham gia nhóm nào.</p>
         )}
-        {myGroups.map(g => <GroupCard key={g.id} g={g} joined={true} onGroupDetail={onGroupDetail}/>)}
+        <div className="card-grid">{myGroups.map(g => <GroupCard key={g.id} g={g} joined={true} onGroupDetail={onGroupDetail}/>)}</div>
 
         <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", margin:"20px 0 12px" }}>
           <p style={{ margin:0, fontSize:"16px", fontWeight:800, color:"#2A2420" }}>Khám phá nhóm</p>
         </div>
-        {discover.map(g => <GroupCard key={g.id} g={g} joined={false} onGroupDetail={onGroupDetail}/>)}
+        <div className="card-grid">{discover.map(g => <GroupCard key={g.id} g={g} joined={false} onGroupDetail={onGroupDetail}/>)}</div>
       </div>
     </div>
   );

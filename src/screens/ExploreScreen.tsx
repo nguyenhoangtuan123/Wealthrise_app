@@ -217,7 +217,7 @@ function ExploreTab({ onNavigateToTopic, onNavigateToArticle, onNavigateToList, 
             Xem tất cả &gt;
           </button>
         </div>
-        {trendingArticles.map(a => <ArticleRow key={a.id} article={a} onPress={() => onNavigateToArticle(a.id)}/>)}
+        <div className="card-grid">{trendingArticles.map(a => <ArticleRow key={a.id} article={a} onPress={() => onNavigateToArticle(a.id)}/>)}</div>
       </div>
     </>
   );

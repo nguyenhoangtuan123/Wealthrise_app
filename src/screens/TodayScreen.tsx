@@ -109,10 +109,10 @@ export default function TodayScreen({
   const displayArticles = forYouArticles.length >= 1 ? forYouArticles : ARTICLES.slice(0, 2);
 
   return (
-    <div style={{ minHeight:"100%", background:"#FFF8F4", fontFamily:"'Nunito', sans-serif", paddingBottom:"16px" }}>
+    <div className="today-layout" style={{ minHeight:"100%", background:"#FFF8F4", fontFamily:"'Nunito', sans-serif", paddingBottom:"16px" }}>
 
       {/* ── HEADER ── */}
-      <div style={{ display:"flex", alignItems:"flex-start", justifyContent:"space-between", padding:"16px 20px 14px" }}>
+      <div className="today-heading" style={{ display:"flex", alignItems:"flex-start", justifyContent:"space-between", padding:"16px 20px 14px" }}>
         <div>
           <p style={{ margin:0, fontSize:"13px", fontWeight:500, color:"#9A8A7A" }}>Chào buổi sáng,</p>
           <h1 style={{ margin:"2px 0 4px", fontSize:"26px", fontWeight:900, color:"#2A2420", lineHeight:1.2 }}>Hôm nay 👋</h1>
@@ -138,7 +138,7 @@ export default function TodayScreen({
       </div>
 
       {/* ── WEEKLY FIRE CALENDAR ── */}
-      <div style={{ margin:"0 20px 16px", padding:"16px 18px 18px", background:"#FFFFFF", borderRadius:"20px", boxShadow:"0 2px 12px rgba(0,0,0,0.06)" }}>
+      <div className="today-calendar" style={{ margin:"0 20px 16px", padding:"16px 18px 18px", background:"#FFFFFF", borderRadius:"20px", boxShadow:"0 2px 12px rgba(0,0,0,0.06)" }}>
         <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:"14px" }}>
           <h2 style={{ margin:0, fontSize:"15px", fontWeight:800, color:"#2A2420" }}>Lịch giữ lửa 🔥</h2>
           <span style={{ fontSize:"12px", color:"#9A8A7A" }}>Tuần này</span>
@@ -202,7 +202,7 @@ export default function TodayScreen({
       </div>
 
       {/* ── HABITS HÔM NAY ── */}
-      <div style={{ padding:"0 20px 16px" }}>
+      <div className="today-habits" style={{ padding:"0 20px 16px" }}>
         <div style={{ display:"flex", alignItems:"baseline", justifyContent:"space-between", marginBottom:"12px" }}>
           <h2 style={{ margin:0, fontSize:"16px", fontWeight:800, color:"#2A2420" }}>Hôm nay</h2>
           {totalToday > 0 && (
@@ -255,7 +255,7 @@ export default function TodayScreen({
       </div>
 
       {/* ── BÀI VIẾT MỚI ── */}
-      <div style={{ padding:"0 20px" }}>
+      <div className="today-articles" style={{ padding:"0 20px" }}>
         <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:"12px" }}>
           <h2 style={{ margin:0, fontSize:"16px", fontWeight:800, color:"#2A2420" }}>Bài viết dành cho bạn</h2>
         </div>

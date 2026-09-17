@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import WealthRISELogo from "./components/WealthRISELogo";
 import OnboardingScreen   from "./screens/OnboardingScreen";
 import Screen21Goals      from "./screens/Screen21Goals";
 import Screen22Login      from "./screens/Screen22Login";
@@ -208,6 +209,7 @@ export default function App() {
 
   const selectedHabit = habits.find(h => h.id === selectedHabitId) ?? habits[0];
   const showNav = !HIDE_NAV_SCREENS.includes(screen);
+  const isOnboarding = ONBOARDING_SCREENS.includes(screen) || screen === "login22" || screen === "purpose23";
 
   const handleResetDemo = () => {
     /* Clear all wr_* keys then restore mock state */
@@ -221,9 +223,16 @@ export default function App() {
   };
 
   return (
-    <div style={{ width:"390px", height:"844px", display:"flex", flexDirection:"column", background:"#FFF8F4", fontFamily:"'Nunito', sans-serif", overflow:"hidden", position:"relative" }}>
-      <StatusBar />
-      <div style={{ flex:1, overflowY:"auto", overflowX:"hidden", scrollbarWidth:"none" }}>
+    <div className={`app-shell ${isOnboarding ? "app-onboarding" : "app-workspace"}`}>
+      {!isOnboarding && <aside className="desktop-sidebar">
+        <a className="app-brand" href="#" onClick={e => { e.preventDefault(); switchTab("today"); }}><WealthRISELogo size={44}/><strong>WealthRISE</strong></a>
+        <p className="sidebar-caption">HÀNH TRÌNH CỦA BẠN</p>
+        <BottomNav activeTab={activeTab} onSwitch={switchTab}/>
+        <div className="sidebar-note"><span>🌱</span><strong>Mỗi ngày, tốt hơn một chút.</strong><p>Những thói quen nhỏ làm nên thay đổi lớn.</p></div>
+        <button className="sidebar-settings" onClick={() => navigate("settings")}>⚙ Cài đặt</button>
+      </aside>}
+      <div className="app-main">
+      <main key={screen} className={`app-content screen-${screen}`}>
 
         {screen === "onboarding" && (
           <OnboardingScreen onNext={() => navigate("goals21")}/>
@@ -321,34 +330,8 @@ export default function App() {
         {screen === "challenge-history" && <ChallengeHistoryScreen onBack={goBack}/>}
         {screen === "privacy"           && <PrivacyScreen onBack={goBack}/>}
         {screen === "settings"          && <SettingsScreen onBack={goBack} onResetDemo={handleResetDemo}/>}
-      </div>
-      {showNav && <BottomNav activeTab={activeTab} onSwitch={switchTab}/>}
-    </div>
-  );
-}
-
-function StatusBar() {
-  return (
-    <div style={{ flexShrink:0, height:"50px", display:"flex", alignItems:"center", justifyContent:"space-between", padding:"12px 22px 0" }}>
-      <span style={{ fontSize:"15px", fontWeight:700, color:"#1F2A35" }}>9:41</span>
-      <div style={{ display:"flex", alignItems:"center", gap:"6px" }}>
-        <svg width="17" height="13" viewBox="0 0 17 13" fill="none">
-          <rect x="0" y="7" width="3" height="6" rx="1" fill="#1F2A35"/>
-          <rect x="4.5" y="4.5" width="3" height="8.5" rx="1" fill="#1F2A35"/>
-          <rect x="9" y="2" width="3" height="11" rx="1" fill="#1F2A35"/>
-          <rect x="13.5" y="0" width="3" height="13" rx="1" fill="#1F2A35" opacity="0.28"/>
-        </svg>
-        <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
-          <path d="M8 9.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3z" fill="#1F2A35"/>
-          <path d="M3.5 6.5A6.5 6.5 0 0112.5 6.5" stroke="#1F2A35" strokeWidth="1.5" strokeLinecap="round"/>
-          <path d="M1 3.5A10 10 0 0115 3.5" stroke="#1F2A35" strokeWidth="1.5" strokeLinecap="round"/>
-        </svg>
-        <div style={{ display:"flex", alignItems:"center" }}>
-          <div style={{ width:"25px", height:"12px", border:"1.5px solid #1F2A35", borderRadius:"3.5px", padding:"2px", display:"flex", alignItems:"center" }}>
-            <div style={{ width:"17px", height:"6px", background:"#1F2A35", borderRadius:"1.5px" }}/>
-          </div>
-          <div style={{ width:"2px", height:"5px", background:"#1F2A35", borderRadius:"1px", marginLeft:"1px" }}/>
-        </div>
+      </main>
+      {showNav && <div className="mobile-navigation"><BottomNav activeTab={activeTab} onSwitch={switchTab}/></div>}
       </div>
     </div>
   );
@@ -362,12 +345,12 @@ const NAV_TABS = [
 
 function BottomNav({ activeTab, onSwitch }: { activeTab:Tab; onSwitch:(t:Tab)=>void }) {
   return (
-    <div style={{ flexShrink:0, background:"#FFFFFF", borderTop:"1px solid #EEE8E0", boxShadow:"0 -2px 16px rgba(0,0,0,0.05)", display:"flex", alignItems:"center", justifyContent:"space-around", padding:"10px 0 24px" }}>
+    <nav className="app-navigation" aria-label="Điều hướng chính" style={{ flexShrink:0, background:"#FFFFFF", borderTop:"1px solid #EEE8E0", boxShadow:"0 -2px 16px rgba(0,0,0,0.05)", display:"flex", alignItems:"center", justifyContent:"space-around", padding:"10px 0 24px" }}>
       {NAV_TABS.map(({ tab, label }) => {
         const active = activeTab === tab;
         const c = active ? "#F28C64" : "#6F777A";
         return (
-          <button key={tab} onClick={()=>onSwitch(tab)} style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:"3px", background:"none", border:"none", cursor:"pointer", minWidth:"60px", padding:"2px 0" }}>
+          <button key={tab} aria-current={active ? "page" : undefined} onClick={()=>onSwitch(tab)} style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:"3px", background:"none", border:"none", cursor:"pointer", minWidth:"60px", padding:"2px 0" }}>
             {tab==="today"     && <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>}
             {tab==="explore"   && <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>}
             {tab==="challenge" && <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>}
@@ -377,6 +360,6 @@ function BottomNav({ activeTab, onSwitch }: { activeTab:Tab; onSwitch:(t:Tab)=>v
           </button>
         );
       })}
-    </div>
+    </nav>
   );
 }

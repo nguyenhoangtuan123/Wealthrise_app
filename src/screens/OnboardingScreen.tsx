@@ -7,14 +7,14 @@ interface Props {
 
 export default function OnboardingScreen({ onNext }: Props) {
   return (
-    <div style={{
+    <div className="welcome-screen" style={{
       height: "100%", background: "#FFF8F4",
       display: "flex", flexDirection: "column",
       overflow: "hidden", position: "relative",
       fontFamily: "'Inter', sans-serif",
     }}>
       {/* Full-bleed atmospheric illustration */}
-      <div style={{ flex: 1, position: "relative", overflow: "hidden", minHeight: 0 }}>
+      <div className="welcome-art" style={{ flex: 1, position: "relative", overflow: "hidden", minHeight: 0 }}>
         <svg
           viewBox="0 0 390 480"
           preserveAspectRatio="xMidYMax slice"
@@ -173,7 +173,7 @@ export default function OnboardingScreen({ onNext }: Props) {
       </div>
 
       {/* Content panel */}
-      <div style={{
+      <div className="welcome-copy" style={{
         width: "100%", flexShrink: 0,
         background: "#FFF8F4",
         padding: "0 24px 40px",

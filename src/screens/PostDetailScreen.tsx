@@ -75,7 +75,7 @@ export default function PostDetailScreen({ post, onBack }: Props) {
       {menuOpen && (
         <>
           <div onClick={() => setMenuOpen(false)} style={{ position:"fixed", inset:0, background:"rgba(0,0,0,0.35)", zIndex:50 }}/>
-          <div style={{ position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)", width:"390px", background:"#FFFFFF", borderRadius:"24px 24px 0 0", zIndex:51, paddingBottom:"32px", fontFamily:"'Nunito', sans-serif" }}>
+          <div className="responsive-sheet" style={{ position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)", width:"min(100%, 480px)", background:"#FFFFFF", borderRadius:"24px 24px 0 0", zIndex:51, paddingBottom:"32px", fontFamily:"'Nunito', sans-serif" }}>
             <div style={{ width:"40px", height:"4px", borderRadius:"2px", background:"#E0D8D0", margin:"16px auto 12px" }}/>
             {post.isMine ? (
               <>

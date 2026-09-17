@@ -168,7 +168,7 @@ export default function SettingsScreen({ onBack, onResetDemo }: Props) {
       {showResetConfirm && (
         <>
           <div onClick={() => setShowResetConfirm(false)} style={{ position:"fixed", inset:0, background:"rgba(0,0,0,0.4)", zIndex:50 }}/>
-          <div style={{ position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)", width:"390px", background:"#FFFFFF", borderRadius:"24px 24px 0 0", zIndex:51, padding:"24px 20px 40px", fontFamily:"'Nunito', sans-serif" }}>
+          <div className="responsive-sheet" style={{ position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)", width:"min(100%, 480px)", background:"#FFFFFF", borderRadius:"24px 24px 0 0", zIndex:51, padding:"24px 20px 40px", fontFamily:"'Nunito', sans-serif" }}>
             <div style={{ width:"40px", height:"4px", borderRadius:"2px", background:"#E0D8D0", margin:"0 auto 20px" }}/>
             <p style={{ fontSize:"18px", fontWeight:900, color:"#2A2420", margin:"0 0 8px" }}>Đặt lại demo?</p>
             <p style={{ fontSize:"13px", color:"#5F6368", lineHeight:1.6, margin:"0 0 24px" }}>

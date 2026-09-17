@@ -144,7 +144,7 @@ function Overlay({ onClose }: { onClose: () => void }) {
 
 function Sheet({ children, tall }: { children: React.ReactNode; tall?: boolean }) {
   return (
-    <div style={{ position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)", width:"390px", background:"#FFFFFF", borderRadius:"24px 24px 0 0", zIndex:51, paddingBottom:"32px", fontFamily:"'Nunito', sans-serif", maxHeight: tall ? "70%" : "auto", overflowY: tall ? "auto" : "visible" }}>
+    <div className="responsive-sheet" style={{ position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)", width:"min(100%, 480px)", background:"#FFFFFF", borderRadius:"24px 24px 0 0", zIndex:51, paddingBottom:"32px", fontFamily:"'Nunito', sans-serif", maxHeight: tall ? "70%" : "auto", overflowY: tall ? "auto" : "visible" }}>
       {children}
     </div>
   );
